@@ -27,7 +27,7 @@
                     <x-radio-group name="category" :options="\App\Models\Job::$category" />
                 </div>
             </div>
-            <button class="w-full border">Filter</button>
+            <button class="w-full border py-1">Filter</button>
         </form>
     </x-card>
 
