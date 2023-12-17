@@ -43,4 +43,7 @@
             </div>
         </x-job-card>
     @endforeach
+    <div class="mb-4 bg-slate-200">
+        {{ $jobs->links('pagination::simple-tailwind') }}
+    </div>
 </x-layout>
