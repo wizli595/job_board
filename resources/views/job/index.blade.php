@@ -12,10 +12,10 @@
                 <div>
                     <div class="mb-1 font-semibold">Salary </div>
                     <div class="flex space-x-2">
-                        <x-text-input form-ref="filters" name="min_salary" value="{{ request('min_salary') }}"
-                            placeholder='From' />
-                        <x-text-input form-ref="filters" name="max_salary" value="{{ request('max_salary') }}"
-                            placeholder='To' />
+                        <x-text-input form-ref="filters" type="number" name="min_salary"
+                            value="{{ request('min_salary') }}" placeholder='From' />
+                        <x-text-input form-ref="filters" type="number" name="max_salary"
+                            value="{{ request('max_salary') }}" placeholder='To' />
                     </div>
                 </div>
                 <div>
