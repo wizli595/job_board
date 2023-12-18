@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("", fn () => to_route("job.index"));
-Route::get("login", fn () => to_route('auth.create'))->name("login");
 Route::resource('job', JobController::class)->only(["index", "show"]);
+
+Route::delete("logout", fn () => to_route("auth.destroy"))->name('logout');
+Route::delete("logout", [AuthController::class, 'destroy'])->name('auth.destroy');
+
+Route::get("login", fn () => to_route('auth.create'))->name("login");
 Route::resource('auth', AuthController::class)->only(['create', 'store']);
