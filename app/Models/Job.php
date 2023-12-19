@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -19,6 +20,17 @@ class Job extends Model
     {
         return $this->belongsTo(Employer::class);
     }
+
+    /**
+     * Get all of the jobApplication for the Job
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jobApplications(): HasMany
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
     public function scopeFilter(QueryBuilder | Builder $query, array $filters): QueryBuilder | Builder
     {
         return $query->when($filters['Search'] ?? null, function ($query, $search) {
