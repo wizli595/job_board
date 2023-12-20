@@ -12,12 +12,13 @@
         </div>
         <div class="flex space-x-1 text-xs">
             <x-tag>
-                <a href="{{ route('job.index', ['experience' => $job->experience]) }}">
+                <a href="{{ $isAll ? route('job.index', ['experience' => $job->experience]) : '#' }}">
                     {{ Str::ucfirst($job->experience) }}
                 </a>
+
             </x-tag>
             <x-tag>
-                <a href="{{ route('job.index', ['category' => $job->category]) }}">
+                <a href="{{ $isAll ? route('job.index', ['category' => $job->category]) : '#' }}">
                     {{ $job->category }}
                 </a>
             </x-tag>

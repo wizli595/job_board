@@ -1,9 +1,12 @@
 <x-layout>
     <x-breadcrumbs class="mb-4" :links="['Jobs' => route('job.index'), $job->title => '#']" />
-    <x-job-card :$job>
+    <x-job-card :$job :isAll="false">
         <p class="mb-4 text-sm text-slate-500">
             {!! nl2br(e($job->description)) !!}
         </p>
+        <x-link-button :href="route('job.application.create', $job)">
+            Apply
+        </x-link-button>
     </x-job-card>
     <x-card class="mb-4">
         <h2 class="mb-4 text-lg font-medium">

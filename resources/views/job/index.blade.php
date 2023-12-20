@@ -35,7 +35,7 @@
     </x-card>
 
     @foreach ($jobs as $job)
-        <x-job-card :$job>
+        <x-job-card :$job :isAll="true">
             <div>
                 <x-link-button :href="route('job.show', ['job' => $job])">
                     Show
