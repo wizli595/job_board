@@ -25,11 +25,6 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function employer(): HasOne
-    {
-        return $this->hasOne(Employer::class);
-    }
-
     /**
      * Get all of the jobApplication for the Job
      *
@@ -39,6 +34,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(JobApplication::class);
     }
+
+    public function employer(): HasOne
+    {
+        return $this->hasOne(Employer::class);
+    }
+
 
 
     /**
