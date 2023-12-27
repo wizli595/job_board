@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobApplication;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,12 @@ class MyJobApplicationController extends Controller
     public function index(User $user)
     {
         $applications = auth()->user()
-            ->jobApplications()->with('job.employer', 'job')
+            ->jobApplications()
+            ->with([
+                'job.employer',
+                'job' => fn ($query) => $query->withCount('jobApplications')
+                    ->withAvg('jobApplications', 'expected_salary')
+            ])
             ->latest()->get();
         // dd($applications);
         return view('myJobApplications.index', ['applications' => $applications]);
@@ -65,8 +71,14 @@ class MyJobApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(JobApplication $MyJobApplication)
     {
-        //
+        // dd($MyJobApplication);
+        $MyJobApplication->delete();
+
+        return redirect()->back()->with(
+            'success',
+            'Job application removed.'
+        );
     }
 }
