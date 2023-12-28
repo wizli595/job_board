@@ -11,5 +11,16 @@
 
     <input type="{{ $type }}" placeholder="{{ $placeholder }}" value="{{ $value }}"
         name="{{ $name }}" id="{{ $name }}" x-ref="input-{{ $name }}"
-        class="w-full rounded-md border-0 py-1.5 px-2.5 pr-7 text-sm ring-1 ring-slate-300 placeholder:text-slate-400 focus:right-2 " />
+        @class([
+            'w-full rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 ring-slate-300 placeholder:text-slate-400 focus:right-2 ',
+            'pr-8' => $formRef,
+            'ring-slate-300' => !$errors->has($name),
+            'ring-red-300' => $errors->has($name),
+        ]) />
+
+    @error($name)
+        <div class="mt-1 text-sm text-red-500">
+            {{ $message }}
+        </div>
+    @enderror
 </div>
