@@ -1,3 +1,5 @@
 <x-layout>
-    All
+    <x-card>
+        All
+    </x-card>
 </x-layout>

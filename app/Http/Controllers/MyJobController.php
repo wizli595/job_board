@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class MyJobController extends Controller
@@ -11,7 +12,15 @@ class MyJobController extends Controller
      */
     public function index()
     {
-        return view('my_job.index');
+        return view(
+            'my_job.index',
+            [
+                'jobs' => request()
+                    ->user()
+                    ->with(['employer', 'jobApplications', 'jobApplications.user'])
+                    ->get()
+            ]
+        );
     }
 
     /**
@@ -27,7 +36,17 @@ class MyJobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'title' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'salary' => 'required|numeric|min:5000',
+            'description' => 'required|string',
+            'experience' => 'required|in:' . implode(',', Job::$experience),
+            'category' => 'required|in:' . implode(',', Job::$category),
+        ]);
+        $request->user()->employer->jobs()->create($validateData);
+        return redirect()->route('my-job.index')
+            ->with('success', "Job created successfully.");
     }
 
     /**
