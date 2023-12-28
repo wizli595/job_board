@@ -1,3 +1,6 @@
-<div>
-    <!-- Waste no more time arguing what a good man should be, be one. - Marcus Aurelius -->
-</div>
+<label for="{{ $for }}" class="mb-2 block text-sm font-medium text-slate-900">
+    {{ $slot }}
+    @if ($required)
+        <span>*</span>
+    @endif
+</label>

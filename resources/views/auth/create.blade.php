@@ -8,12 +8,12 @@
         <form action="{{ route('auth.store') }}" method="POST">
             @csrf
             <div class="mb-8">
-                <label for="email" class="mb-2 block text-sm font-medium text-slate-900">E-mail</label>
+                <x-lable for="email">E-mail</x-lable>
                 <x-text-input name='email' />
             </div>
 
             <div class="mb-8">
-                <label for="email" class="mb-2 block text-sm font-medium text-slate-900">Password</label>
+                <x-lable for="email">Password</x-lable>
                 <x-text-input name='password' type="password" />
             </div>
             <div class="mb-8 flex justify-between text-sm font-medium">
