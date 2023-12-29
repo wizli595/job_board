@@ -15,12 +15,12 @@ class MyJobApplicationController extends Controller
 
     public function index(User $user)
     {
-        $applications = auth()->user()
+        $applications = request()->user()
             ->jobApplications()
             ->with([
                 'job.employer',
                 'job' => fn ($query) => $query->withCount('jobApplications')
-                    ->withAvg('jobApplications', 'expected_salary')
+                    ->withAvg('jobApplications', 'expected_salary')->withTrashed()
             ])
             ->latest()->get();
         // dd($applications);

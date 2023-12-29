@@ -20,9 +20,14 @@ class JobController extends Controller
             "experience",
             "category"
         );
+
+        $jobs = Job::with("employer")->latest()->filter($filters)->paginate(10);
+
+        $jobs->appends($filters);
+
         return view(
             "job.index",
-            ["jobs" => Job::with("employer")->latest()->filter($filters)->paginate(10)]
+            ["jobs" => $jobs]
         );
     }
 
