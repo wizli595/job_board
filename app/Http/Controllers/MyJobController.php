@@ -16,7 +16,7 @@ class MyJobController extends Controller
             'my_job.index',
             [
                 'jobs' => request()
-                    ->user()
+                    ->user()->employer->jobs()
                     ->with(['employer', 'jobApplications', 'jobApplications.user'])
                     ->get()
             ]
